@@ -1,1 +1,3 @@
 # Decoder-Transformer
+
+This repository contains a decoder-only Transformer model, which is a variant of the architecture presented in the 'Attention is All You Need' paper. The model is specifically designed for next-word prediction in English text. While the data preprocessing and training steps have not yet been completed, the plan is to acquire a corpus of English text, preprocess it using tokenizers to create input-target pairs, and then train the model using GPUs on Google Colab. The goal is to develop a model that can predict the next token in a sentence, akin to the early versions of the GPT series.
