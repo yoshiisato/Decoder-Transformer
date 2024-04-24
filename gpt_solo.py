@@ -75,7 +75,7 @@ class Head(nn.Module):
         k = self.key(x)   # (B, T, hs)
         q = self.query(x) # (B, T, hs)
 
-        attention_scores = q @ k.transpose(-2, -1) * k.shape[-1]**0.5 # (B, T, hs) @ (B, hs, T) -> (B, T, T)
+        attention_scores = q @ k.transpose(-2, -1) * k.shape[-1]**-0.5 # (B, T, hs) @ (B, hs, T) -> (B, T, T)
         attention_scores = attention_scores.masked_fill(self.tril[:T, :T] == 0, float('-inf')) # (B, T, T)
         attention_scores = F.softmax(attention_scores, dim=-1)
         attention_scores = self.dropout(attention_scores)
@@ -143,7 +143,7 @@ class GPTLanguageModel(nn.Module):
         elif isinstance(module, nn.Embedding):
             torch.nn.init.normal_(module.weight, mean=0.0, std=0.02)
      
-    def forward(self, idx, targets=None): # I still dont exactly understand what 'idx' is <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    def forward(self, idx, targets=None): 
         B, T = idx.shape
 
         tok_emb = self.token_embedding_table(idx) # (B, T, C) == (Batchsize, seqlen, dmodel)
@@ -153,7 +153,7 @@ class GPTLanguageModel(nn.Module):
         x = self.ln_f(x) # (B, T, C)
         logits = self.lm_head(x) # (B, T, vocab_size)
 
-        if targets is None: # this is still unclear why <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        if targets is None: 
             loss = None
         else:
             B, T, C = logits.shape
@@ -163,7 +163,7 @@ class GPTLanguageModel(nn.Module):
         
         return logits, loss
 
-    def generate(self, idx, max_new_tokens): # whole generate code is still not understood <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    def generate(self, idx, max_new_tokens):
         for _ in range(max_new_tokens):
             idx_cond = idx[:, -block_size:]
             logits, loss = self(idx_cond)
