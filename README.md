@@ -9,3 +9,7 @@ File contains a decoder-only transformer model based off of the original transfo
 ### gpt-solo.py
 
 This py file contains a comprehensive end-to-end process of training a decoder-only transformer. Similar to OpenAI's gpt-2 model (small), it is trained on a corpus of text, capable of text generation. It is trained on Andrej Karpathy's tiny-Shakespeare, a text file that contains all Shakespeare's text in one file. The text is preprocessed by tokenizing, cleaning, and formatting, and then created into batches using tensors. These tensors are passed through the gpt model (100M parameters), and trained using Adam. Google colab's A100s are used to train this model. 
+
+### gpt-2-training-pipeline.ipynb
+
+This ipython notebook file contains a newly developed end-to-end training pipeline for a decoder model on a openwebtext dataset. The 20 gb text corpus is downloaded off of huggingface datasets, and preprocessed into a memmap to efficiently allow dataloading without overloading system RAM. This is necessary for efficient use of memory and computational resources in the google colab environmnent. The datapreprocessing and the training process is a work-in-progress. (a single a100 gpu on google colab is still not enough to train a model this big on a large amount of data.)
