@@ -13,3 +13,7 @@ This py file contains a comprehensive end-to-end process of training a decoder-o
 ### gpt-2-training-pipeline.ipynb
 
 This ipython notebook file contains a newly developed end-to-end training pipeline for a decoder model on a openwebtext dataset. The 20 gb text corpus is downloaded off of huggingface datasets, and preprocessed into a memmap to efficiently allow dataloading without overloading system RAM. This is necessary for efficient use of memory and computational resources in the google colab environmnent. The datapreprocessing and the training process is a work-in-progress. (a single a100 gpu on google colab is still not enough to train a model this big on a large amount of data.)
+
+### gpt-mini-background.ipynb and prepare.ipynb
+
+These google colab notebooks are the final product of the end-to-end decoder model training pipeline (on openwebtext dataset). prepare.ipynb creates a small subset of the original openwebtext dataset and reduces it down to 10,000 rows. There are 176,000 batches with batch size 64 and sequence length 128. The 30M parameter decoder only model is trained on a total of 1.4B tokens of openwebtext from huggingface. The final product is trained on a fraction of the initial data because of its memory and computational resource limitations. 1 epoch is predicted to take around 6 hours to train, and it is currently training using google colab A100 gpus on background execution. Data on training loss and outcome will be presented later. 
