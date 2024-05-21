@@ -20,3 +20,25 @@ These google colab notebooks are the final product of the end-to-end decoder mod
 
 ![Loss logging on Weights and Biases](Images/wandb_test.png)
 
+### Problem Identified
+
+During the training of my 30M parameter transformer model, I noticed that the training loss plateaued around 3.16 and the validation loss continuously increased, indicating overfitting. Upon further investigation, I discovered a significant issue with the way the training dataset was constructed.
+
+The dataset was originally calculated to contain 1.4B tokens based on the following formula: `seqlen * batchsize * len(trainloader)`. However, this approach mistakenly included redundant sequences, as each 128-token sequence was reused multiple times without a stride, leading to a significant overestimation of the actual unique data used for training.
+
+This redundancy caused the model to see the same data repeatedly, leading to poor generalization and overfitting to the training data.
+
+### Solution
+
+To address this issue, I will implement the following solutions:
+
+1. **Implement a Stride**: Introduce a stride of 128 tokens in the custom dataset to ensure each sequence starts from the next token, eliminating redundancy and providing more unique training examples.
+2. **Increase Dataset Size**: Scale up the dataset to include more rows, aiming to train on a larger portion of the available 8B tokens. This will enhance the diversity and representativeness of the training data.
+3. **Recalculate Tokens**: Accurately calculate the number of unique tokens used for training post-stride implementation to ensure correct dataset sizing.
+
+These changes are expected to improve the model's generalization and reduce overfitting by providing a larger and more diverse set of training examples.
+
+### Next Steps
+
+I will apply these fixes and retrain the model. The readme will be updated with the new training results and any further insights gained from the process. Stay tuned for updates!
+
