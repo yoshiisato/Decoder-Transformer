@@ -42,5 +42,5 @@ These changes are expected to improve the model's generalization and reduce over
 
 I will apply these fixes and retrain the model. The readme will be updated with the new training results and any further insights gained from the process. Stay tuned for updates!
 
-![2nd iteration of Logging Loss on Weights and Biases](Images/wandb_run_2)
+![2nd iteration of Logging Loss on Weights and Biases](Images/wandb_run_2.png)
 
