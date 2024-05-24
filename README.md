@@ -18,7 +18,7 @@ This ipython notebook file contains a newly developed end-to-end training pipeli
 
 These google colab notebooks are the final product of the end-to-end decoder model training pipeline. prepare.ipynb creates a small subset of the original openwebtext dataset and reduces it down to 10,000 rows. There are 176,000 batches with batch size 64 and sequence length 128. The 30M parameter decoder-only model is trained on a total of 1.4B tokens of openwebtext from huggingface. The final product is trained on a fraction of the initial data because of its memory and computational resource limitations. 1 epoch is predicted to take around 6 hours to train, and it is currently training using google colab A100 gpus on background execution. Data on training loss and outcome will be presented later. 
 
-![Loss logging on Weights and Biases](Images/wandb_test.png)
+![Logging loss on Weights and Biases](Images/wandb_test.png)
 
 ### Problem Identified
 
@@ -41,4 +41,6 @@ These changes are expected to improve the model's generalization and reduce over
 ### Next Steps
 
 I will apply these fixes and retrain the model. The readme will be updated with the new training results and any further insights gained from the process. Stay tuned for updates!
+
+![2nd iteration of Logging Loss on Weights and Biases](Images/wandb_run_2)
 
